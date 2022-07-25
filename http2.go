@@ -45,6 +45,9 @@ var ConnectionSettings = map[SettingID]uint32{
 	SettingInitialWindowSize:    6291456,
 	SettingMaxFrameSize:         16384,
 	SettingMaxHeaderListSize:    262144,
+
+	SettingSendPush:         0,
+	SettingSendMaxFrameSize: 0,
 }
 
 func init() {
@@ -163,6 +166,9 @@ const (
 	SettingInitialWindowSize    SettingID = 0x4
 	SettingMaxFrameSize         SettingID = 0x5
 	SettingMaxHeaderListSize    SettingID = 0x6
+
+	SettingSendPush         	SettingID = 0x7
+	SettingSendMaxFrameSize 	SettingID = 0x8
 )
 
 var settingName = map[SettingID]string{
