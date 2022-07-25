@@ -662,10 +662,18 @@ func (t *Transport) newClientConn(c net.Conn, singleUse bool) (*ClientConn, erro
 
 	initialSettings := []Setting{
 		{ID: SettingHeaderTableSize, Val: ConnectionSettings[SettingHeaderTableSize]},
-		{ID: SettingEnablePush, Val: ConnectionSettings[SettingEnablePush]},
+		//{ID: SettingEnablePush, Val: ConnectionSettings[SettingEnablePush]},
 		{ID: SettingMaxConcurrentStreams, Val: ConnectionSettings[SettingMaxConcurrentStreams]},
 		{ID: SettingInitialWindowSize, Val: ConnectionSettings[SettingInitialWindowSize]},
-		{ID: SettingMaxFrameSize, Val: ConnectionSettings[SettingMaxFrameSize]},
+		//{ID: SettingMaxFrameSize, Val: ConnectionSettings[SettingMaxFrameSize]},
+	}
+
+
+	if ConnectionSettings[SettingSendPush] == 1 {
+		initialSettings = append(initialSettings, Setting{ID: SettingEnablePush, Val: ConnectionSettings[SettingEnablePush]})
+	}
+	if ConnectionSettings[SettingSendMaxFrameSize] == 1 {
+		initialSettings = append(initialSettings, Setting{ID: SettingMaxFrameSize, Val: ConnectionSettings[SettingMaxFrameSize]})
 	}
 
 	if max := t.maxHeaderListSize(); max != 0 {
